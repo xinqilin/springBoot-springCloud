@@ -12,7 +12,7 @@
 #### eureka-client(discovery) [provider]
 #### eureka-client(discovery) [consumer]
 
-### server
+## server
 properties:
 
 ```
@@ -31,3 +31,14 @@ eureka.client.service-url.defaultZone=http://localhost:8761/eureka/    (server�
 Go 
 <a href="http://localhost:8761/">Eureka Server</a>
 
+## Provider
+
+properties:
+
+```
+server.port=8001
+spring.application.name=provider-ticket  (name)
+eureka.instance.prefer-ip-address=true   (註冊時，使用ip進行註冊)   
+eureka.client.service-url.defaultZone=http://localhost:8761/eureka/    (註冊URL)
+
+```
