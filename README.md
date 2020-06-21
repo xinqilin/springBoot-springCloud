@@ -12,3 +12,22 @@
 #### eureka-client(discovery) [provider]
 #### eureka-client(discovery) [consumer]
 
+### server
+properties:
+
+```
+
+server.port=8761   (server port)
+eureka.instance.hostname=eureka-server
+eureka.client.register-with-eureka=false (不註冊自己到eureka)
+eureka.client.fetch-registry=false (不從eureka取得註冊訊息 ，因為自己是server)
+eureka.client.service-url.defaultZone=http://localhost:8761/eureka/    (server註冊的URL)
+
+```
+
+### 開啟使用
+``@EnableEurekaServer``
+
+Go 
+<a href="http://localhost:8761/">Eureka Server</a>
+
