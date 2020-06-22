@@ -7,6 +7,7 @@ public class TicketService {
 
 	
 	public String getTicket() {
+		System.out.println("port:8001，provider");
 		return "<少林足球>";
 	}
 }
