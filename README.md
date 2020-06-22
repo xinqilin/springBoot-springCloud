@@ -42,3 +42,58 @@ eureka.instance.prefer-ip-address=true   (註冊時，使用ip進行註冊)
 eureka.client.service-url.defaultZone=http://localhost:8761/eureka/    (註冊URL)
 
 ```
+
+## consumer 
+
+```
+spring.application.name=consumer-user
+server.port=8200
+
+eureka.instance.prefer-ip-address=true
+eureka.client.service-url.defaultZone=http://localhost:8761/eureka/
+
+```
+
+開啟這個
+
+``@EnableDiscoveryClient``
+
+使用 RestTemplate 發http request，搭配LoadBalance
+
+```java
+
+	@LoadBalanced
+	@Bean
+	public RestTemplate restTemplate() {
+		return new RestTemplate();
+	}
+
+```
+
+
+consumer controller
+
+```java
+
+    @Autowired
+	RestTemplate restTemplate;
+
+    @GetMapping("/buy")
+	public String buyTicket(String name) {
+		String s=restTemplate.getForObject("http://PROVIDER-TICKET/ticket", String.class);
+                                                http:// provider在eureka中的名子 / 發送請求
+		return name+"買了"+s;
+	}
+
+
+```
+
+
+consumer test:
+
+``http://localhost:8200/buy`` 
+-> null 買了<書>
+
+``http://localhost:8200/buy?name=Bill``
+
+->Bill 買了<書>
